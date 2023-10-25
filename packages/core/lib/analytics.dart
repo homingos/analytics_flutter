@@ -216,8 +216,8 @@ class Analytics with ClientMethods {
   }
 
   @override
-  Future identify({String? userId, UserTraits? userTraits}) async {
-    final event = IdentifyEvent(userId: userId, traits: userTraits);
+  Future identify({String? userId, UserTraits? userTraits,Map<String,dynamic>? custom}) async {
+    final event = IdentifyEvent(userId: userId, traits: userTraits,custom:custom);
 
     await _process(event);
   }

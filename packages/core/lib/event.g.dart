@@ -79,8 +79,10 @@ IdentifyEvent _$IdentifyEventFromJson(Map<String, dynamic> json) =>
           : DestinationMetadata.fromJson(
               json['_metadata'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$IdentifyEventToJson(IdentifyEvent instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$IdentifyEventToJson(IdentifyEvent instance,Map<String,dynamic>? custom) {
+     var traits =instance.traits?.toJson();
+     if(custom!=null){traits?.addAll(custom);};
+    return<String, dynamic>{
       'anonymousId': instance.anonymousId,
       'messageId': instance.messageId,
       'userId': instance.userId,
@@ -88,8 +90,9 @@ Map<String, dynamic> _$IdentifyEventToJson(IdentifyEvent instance) =>
       'context': instance.context?.toJson(),
       'integrations': instance.integrations,
       '_metadata': instance.metadata?.toJson(),
-      'traits': instance.traits?.toJson(),
+      'traits': traits,
     };
+}
 
 GroupEvent _$GroupEventFromJson(Map<String, dynamic> json) => GroupEvent(
       json['groupId'] as String,

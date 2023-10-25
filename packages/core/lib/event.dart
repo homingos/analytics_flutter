@@ -90,14 +90,15 @@ class TrackEvent extends RawEvent {
 @JsonSerializable(explicitToJson: true)
 class IdentifyEvent extends RawEvent {
   UserTraits? traits;
-  IdentifyEvent({this.traits, String? userId})
+  Map<String,dynamic>? custom;
+  IdentifyEvent({this.traits, String? userId,this.custom})
       : super(EventType.identify, userId: userId);
 
   factory IdentifyEvent.fromJson(Map<String, dynamic> json) =>
       _$IdentifyEventFromJson(json);
   @override
   Map<String, dynamic> toJson() =>
-      eventToJson(_$IdentifyEventToJson(this), this);
+      eventToJson(_$IdentifyEventToJson(this,custom), this);
 }
 
 @JsonSerializable(explicitToJson: true)
