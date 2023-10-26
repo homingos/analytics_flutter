@@ -82,12 +82,22 @@ IdentifyEvent _$IdentifyEventFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$IdentifyEventToJson(IdentifyEvent instance,Map<String,dynamic>? custom) {
      var traits =instance.traits?.toJson();
      if(custom!=null){traits?.addAll(custom);};
+     var _context_custom = instance.context?.toJson();
+      _context_custom?['campaign']={};
+      if(custom?['utm'] != null){
+        _context_custom?['campaign']["medium"]=custom?['utm']?["medium"];
+        _context_custom?['campaign']["name"]=custom?['utm']?["campaign"];
+        _context_custom?['campaign']["term"]=custom?['utm']?["term"];
+        _context_custom?['campaign']["content"]=custom?['utm']?["content"];
+        _context_custom?['campaign']["source"]=custom?['utm']?["source"];
+      }
+     
     return<String, dynamic>{
       'anonymousId': instance.anonymousId,
       'messageId': instance.messageId,
       'userId': instance.userId,
       'timestamp': instance.timestamp,
-      'context': instance.context?.toJson(),
+      'context': _context_custom,
       'integrations': instance.integrations,
       '_metadata': instance.metadata?.toJson(),
       'traits': traits,
