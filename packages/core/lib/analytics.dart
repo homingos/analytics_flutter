@@ -223,8 +223,8 @@ class Analytics with ClientMethods {
   }
 
   @override
-  Future group(String groupId, {GroupTraits? groupTraits}) async {
-    final event = GroupEvent(groupId, traits: groupTraits);
+  Future group(String groupId, {GroupTraits? groupTraits,Map<String,dynamic>? custom}) async {
+    final event = GroupEvent(groupId, traits: groupTraits,custom:custom);
 
     await _process(event);
   }

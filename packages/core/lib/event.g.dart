@@ -2,6 +2,7 @@
 
 part of 'event.dart';
 
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -47,18 +48,21 @@ TrackEvent _$TrackEventFromJson(Map<String, dynamic> json) => TrackEvent(
           : DestinationMetadata.fromJson(
               json['_metadata'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$TrackEventToJson(TrackEvent instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TrackEventToJson(TrackEvent instance) 
+    {
+      var _context_custom = instance.context?.toJson();
+      _context_custom?['ip']=instance.properties?["ip"];
+      return <String, dynamic>{
       'anonymousId': instance.anonymousId,
       'messageId': instance.messageId,
       'userId': instance.userId,
       'timestamp': instance.timestamp,
-      'context': instance.context?.toJson(),
+      'context': _context_custom,
       'integrations': instance.integrations,
       '_metadata': instance.metadata?.toJson(),
       'event': instance.event,
       'properties': instance.properties,
-    };
+    };}
 
 IdentifyEvent _$IdentifyEventFromJson(Map<String, dynamic> json) =>
     IdentifyEvent(
@@ -84,6 +88,7 @@ Map<String, dynamic> _$IdentifyEventToJson(IdentifyEvent instance,Map<String,dyn
      if(custom!=null){traits?.addAll(custom);};
      var _context_custom = instance.context?.toJson();
       _context_custom?['campaign']={};
+      _context_custom?['ip']=custom?['ip'];
       if(custom?['utm'] != null){
         _context_custom?['campaign']["medium"]=custom?['utm']?["medium"];
         _context_custom?['campaign']["name"]=custom?['utm']?["campaign"];
@@ -123,18 +128,24 @@ GroupEvent _$GroupEventFromJson(Map<String, dynamic> json) => GroupEvent(
           : DestinationMetadata.fromJson(
               json['_metadata'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$GroupEventToJson(GroupEvent instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$GroupEventToJson(GroupEvent instance,Map<String,dynamic>? custom){
+    var traits =instance.traits?.toJson();
+     if(custom!=null){traits?.addAll(custom);};
+     var _context_custom = instance.context?.toJson();
+      _context_custom?['ip']=custom?['ip'];
+    
+    return <String, dynamic>{
       'anonymousId': instance.anonymousId,
       'messageId': instance.messageId,
       'userId': instance.userId,
       'timestamp': instance.timestamp,
-      'context': instance.context?.toJson(),
+      'context': _context_custom,
       'integrations': instance.integrations,
       '_metadata': instance.metadata?.toJson(),
       'groupId': instance.groupId,
-      'traits': instance.traits?.toJson(),
+      'traits': traits,
     };
+}
 
 AliasEvent _$AliasEventFromJson(Map<String, dynamic> json) => AliasEvent(
       json['previousId'] as String,
@@ -181,18 +192,21 @@ ScreenEvent _$ScreenEventFromJson(Map<String, dynamic> json) => ScreenEvent(
           : DestinationMetadata.fromJson(
               json['_metadata'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$ScreenEventToJson(ScreenEvent instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ScreenEventToJson(ScreenEvent instance)
+    {
+      var _context_custom = instance.context?.toJson();
+      _context_custom?['ip']=instance.properties?["ip"];
+      return <String, dynamic>{
       'anonymousId': instance.anonymousId,
       'messageId': instance.messageId,
       'userId': instance.userId,
       'timestamp': instance.timestamp,
-      'context': instance.context?.toJson(),
+      'context': _context_custom,
       'integrations': instance.integrations,
       '_metadata': instance.metadata?.toJson(),
       'name': instance.name,
       'properties': instance.properties,
-    };
+    };}
 
 UserTraits _$UserTraitsFromJson(Map<String, dynamic> json) => UserTraits(
       address: json['address'] == null

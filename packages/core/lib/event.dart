@@ -105,13 +105,13 @@ class IdentifyEvent extends RawEvent {
 class GroupEvent extends RawEvent {
   String groupId;
   GroupTraits? traits;
-
-  GroupEvent(this.groupId, {this.traits}) : super(EventType.group);
+  Map<String,dynamic>? custom;
+  GroupEvent(this.groupId, {this.traits,this.custom}) : super(EventType.group);
 
   factory GroupEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupEventFromJson(json);
   @override
-  Map<String, dynamic> toJson() => eventToJson(_$GroupEventToJson(this), this);
+  Map<String, dynamic> toJson() => eventToJson(_$GroupEventToJson(this,custom), this);
 }
 
 @JsonSerializable(explicitToJson: true)
